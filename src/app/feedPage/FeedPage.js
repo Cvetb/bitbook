@@ -1,29 +1,49 @@
-import React, { Component } from 'react';
-import CreateNewPost from "./CreateNewPost"
-import NewTextPost from "./NewTextPost"
-import NewImagePost from "./NewImagePost"
-import NewVideoPost from "./NewVideoPost"
-
-
+import React, { Component } from "react";
+import { postService } from "../../services/PostService";
+import TextPost from "./TextPost";
+import VideoPost from "./VideoPost";
+import ImagePost from "./ImagePost";
 
 class FeedPage extends Component {
+  constructor(props) {
+    super(props);
 
-    componentDidMount() {
+    this.state = {
+      posts: []
+    };
+  }
 
-    }
+  componentDidMount() {
+    postService
+      .fetchPost()
 
-    render() {
-        return (
+      .then(postData => {
+        console.log(postData);
+        this.setState({
+          posts: postData
+        });
+      });
+  }
 
-            <div>
-                <CreateNewPost />
-                <NewTextPost />
-                <NewImagePost />
-                <NewVideoPost />
-            </div>
+  render() {
+    const { post } = this.state;
 
-        );
-    }
+    return (
+      <div>
+
+        {this.state.posts.map(post => {
+          if (post.type === "text") {
+            return <TextPost post={post} />;
+          } else if (post.type === "image") {
+            return <ImagePost post={post} />;
+          } else {
+            
+            return <VideoPost post={post} />;
+          }
+        })}
+      </div>
+    );
+  }
 }
 
 export default FeedPage;

@@ -1,5 +1,6 @@
 import React from 'react';
 import M from "materialize-css"
+import {postService} from "../../services/PostService"
 
 class NewImagePost extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class NewImagePost extends React.Component {
     CheckUrl = () => {
         const input = this.state.input
         const ext = input.substring(input.lastIndexOf('.') + 1);
-        console.log(ext)
+        
         if (ext === "gif" || ext === "GIF" || ext === "JPEG" || ext === "jpeg" || ext === "jpg" || ext === "JPG" || ext === "doc") {
             this.setState({ success: "Success", error: null })
             // return document.getElementById("labelImage").setAttribute("data-success", "Success");
@@ -36,6 +37,14 @@ class NewImagePost extends React.Component {
             this.setState({ success: null, error: "Enter Valid URL" })
             // return document.getElementById("labelImage").setAttribute("data-error", "Enter Valid URL");
         }
+    }
+
+    clickHandler = () => {
+        this.CheckUrl()
+        postService.newImagePost(this.state.input)
+            .then(response => {
+                this.props.reloadPage();
+            })
     }
 
     render() {
@@ -62,7 +71,7 @@ class NewImagePost extends React.Component {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <a className="modal-action waves-effect waves-green btn" onClick={this.CheckUrl}>Post</a>
+                        <a className="modal-action modal-close waves-effect waves-green btn" onClick={this.clickHandler}>Post</a>
                         <a className="modal-action modal-close waves-effect waves-green btn left">Cancel</a>
                     </div>
                 </div>

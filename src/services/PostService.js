@@ -28,7 +28,8 @@ class PostService {
         });
       });
   }
-  newTextPost(post) {
+
+  newTextPost(text) {
     return fetch("http://bitbookapi.azurewebsites.net/api/TextPosts", {
       method: "POST",
       headers: {
@@ -37,14 +38,13 @@ class PostService {
         "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
       },
       body: JSON.stringify({
-        text: post.text,
-        postId: post.id
+        text: text
       })
     }).then(response => response.json());
     
   }
 
-  newImagePost(post) {
+  newImagePost(imageUrl) {
     return fetch("http://bitbookapi.azurewebsites.net/api/ImagePosts", {
       method: "POST",
       headers: {
@@ -53,14 +53,13 @@ class PostService {
         "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
       },
       body: JSON.stringify({
-        imageUrl: post.imageUrl,
-        postId: post.id
+        imageUrl: imageUrl
       })
     }).then(response => response.json());
     
      
   }
-  newVideoPost(post) {
+  newVideoPost(videoUrl) {
     return fetch("http://bitbookapi.azurewebsites.net/api/VideoPosts", {
       method: "POST",
       headers: {
@@ -69,8 +68,7 @@ class PostService {
         "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
       },
       body: JSON.stringify({
-        videoUrl: post.videoUrl,
-        postId: post.id
+        videoUrl: videoUrl
       })
     }).then(response => response.json());
     

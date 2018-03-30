@@ -43,7 +43,7 @@ class NewTextPost extends React.Component {
                         </div>
                 </div>
                 <div className="modal-footer">
-                    <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.clickHandler}>Post</a>
+                    <a className="modal-action modal-close waves-effect waves-green btn-flat" onClick={this.clickHandler}>Post</a>
                     <a className="modal-action modal-close waves-effect waves-green btn left">Cancel</a>
                 </div>
             </div>

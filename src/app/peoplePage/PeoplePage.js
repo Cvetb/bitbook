@@ -8,37 +8,37 @@ class People extends Component {
         this.state = {
             userList: []
         }
-}
-componentDidMount() {
-  
-    this.fetchPeople();
-    
-}
+    }
+    componentDidMount() {
 
-fetchPeople() {
-    userService.fetchUsers()
-      .then(usersAll => {
-         
-          this.setState({
-              userList: usersAll
-        
-          })
-        
-      })
+        this.fetchPeople();
+
     }
 
-render() {
-   
-    return (
-        
+    fetchPeople() {
+        userService.fetchUsers()
+            .then(usersAll => {
+
+                this.setState({
+                    userList: usersAll
+
+                })
+
+            })
+    }
+
+    render() {
+
+        return (
+
             <div className="row">
-            <UserList people={this.state.userList}/>
+                <UserList people={this.state.userList} />
             </div>
-                
-            
-       
-    )
-}
+
+
+
+        )
+    }
 }
 
 

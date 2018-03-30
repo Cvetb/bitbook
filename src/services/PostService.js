@@ -4,6 +4,7 @@ import VideoPost from "../entities/VideoPost";
 import ImagePost from "../entities/ImagePost";
 
 class PostService {
+
   fetchPost() {
     return fetch("http://bitbookapi.azurewebsites.net/api/Posts", {
       method: "GET",
@@ -57,8 +58,9 @@ class PostService {
       })
     }).then(response => response.json());
     
-     
   }
+
+
   newVideoPost(videoUrl) {
     return fetch("http://bitbookapi.azurewebsites.net/api/VideoPosts", {
       method: "POST",
@@ -72,6 +74,50 @@ class PostService {
       })
     }).then(response => response.json());
     
+  }
+
+  singleTextPost(id){
+    return fetch(`http://bitbookapi.azurewebsites.net/api/TextPosts/${id}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Key": "bitbook",
+          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+      }
+      
+  })
+      .then((response) => response.json())
+      .then((postItem) => new TextPost(postItem))
+  }
+
+
+  singleImagePost(id){
+    return fetch(`http://bitbookapi.azurewebsites.net/api/ImagePosts/${id}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Key": "bitbook",
+          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+      }
+      
+  })
+      .then((response) => response.json())
+      .then((postItem) => new ImagePost(postItem))
+  }
+
+  
+  singleVideoPost(id){
+    return fetch(`http://bitbookapi.azurewebsites.net/api/VideoPosts/${id}`, {
+      method: "GET",
+      headers: {
+          "Content-Type": "application/json",
+          "Key": "bitbook",
+          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+      }
+      
+  })
+      .then((response) => response.json())
+      .then((postItem) => new VideoPost(postItem))
   }
 }
 

@@ -23,7 +23,7 @@ fetchPeople() {
               userList: usersAll
         
           })
-          console.log(usersAll);
+         
       })
     }
 

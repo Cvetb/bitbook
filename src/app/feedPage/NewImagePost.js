@@ -25,11 +25,11 @@ class NewImagePost extends React.Component {
         })
     }
 
-    CheckUrl = () => {
+    checkUrl = () => {
         const input = this.state.input
         const ext = input.substring(input.lastIndexOf('.') + 1);
         
-        if (ext === "gif" || ext === "GIF" || ext === "JPEG" || ext === "jpeg" || ext === "jpg" || ext === "JPG" || ext === "doc") {
+        if (ext === "gif" || ext === "GIF" || ext === "JPEG" || ext === "jpeg" || ext === "jpg" || ext === "JPG" || ext === "doc" || ext === "png") {
             this.setState({ success: "Success", error: null })
             // return document.getElementById("labelImage").setAttribute("data-success", "Success");
         }
@@ -40,7 +40,7 @@ class NewImagePost extends React.Component {
     }
 
     clickHandler = () => {
-        this.CheckUrl()
+        this.checkUrl()
         postService.newImagePost(this.state.input)
             .then(response => {
                 this.props.reloadPage();

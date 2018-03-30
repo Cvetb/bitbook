@@ -1,14 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = (props) =>{
     return(
         <nav className="teal">
-        <div className="nav-wrapper">
-          <a className="brand-logo left">Bitbook</a>
+        <div className="container nav-wrapper">
+        <span className="left">
+          <Link to = '/' className="brand-logo">Bitbook</Link>
+          </span>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><a >Feed</a></li>
-            <li><a >People</a></li>
-            <li><a >Profile</a></li>
+            <li><Link to = '/' >Feed</Link></li>
+            <li><Link to = '/people'>People</Link></li>
+            <li><Link to = '/profile'>Profile</Link></li>
           </ul>
         </div>
       </nav>

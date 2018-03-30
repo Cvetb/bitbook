@@ -1,13 +1,10 @@
 class Post {
     constructor(post) {
-        
         this.postComments = post.commentsNum;
         this.postUserId = post.userId;
         this.postUserName = post.userName;
         this.postId = post.id;
         this.type= post.type;
-
-
     }
 }
 

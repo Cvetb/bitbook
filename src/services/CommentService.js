@@ -1,7 +1,8 @@
 import Comment from '../entities/Comment'
+
 class CommentService {
     fetchComment(id) {
-      return fetch(`http://bitbookapi.azurewebsites.net/api/comments?postId=${id}`, {
+      return fetch(`http://bitbookapi.azurewebsites.net/api/Comments?postId=${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -9,14 +10,15 @@ class CommentService {
           "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
         }
       })
-      .then(response => {
-        return response.json();
-      })
-      .then((comments) => comments.map((comment) => new Comment(comment)))
+      .then((response) => response.json())
+      .then((comments) => comments.map(comment => {
+        return new Comment(comment);
+      }))
     }
+  
     
     newComment(data) {
-        return fetch('http://bitbookapi.azurewebsites.net/api/comments', {
+        return fetch('http://bitbookapi.azurewebsites.net/api/Comments', {
         method: "POST",
         headers:{
           "Content-Type": "application/json",

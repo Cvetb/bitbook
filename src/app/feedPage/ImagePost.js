@@ -1,23 +1,25 @@
 import React from "react";
-import M from "materialize-css";
+import {Link} from "react-router-dom"
 
 const ImagePost = props => {
   const { post } = props;
 
   return (
+    
     <div className="row">
       <div className="col s12 m8 offset-m2">
         <div className="card">
           
             <img alt="" width="100%" src={post.imageUrl} />
             <div className="card-action">
-            <a className="left">{post.type} Post</a>
-            <a className="right">{post.postComments} Comments</a>
+            <p className="left"><Link to = {`/postPage/${post.postId}`}>{post.type} Post</Link></p>
+            <p className="right"><Link to = {`/postPage/${post.postId}`}>{post.postComments} Comments</Link></p>
           </div>
           </div>
          
         </div>
       </div>
+      
     
   );
 };

@@ -1,9 +1,9 @@
 import Post from './Post.js';
-class ImagePost  extends Post{
+
+class ImagePost  extends Post {
     constructor(post) {
         super(post);
-        this.imageUrl = post.imageUrl; 
-
+        this.imageUrl = post.imageUrl
     }
 }
 

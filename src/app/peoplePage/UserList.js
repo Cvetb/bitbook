@@ -7,14 +7,14 @@ const UserList = (props) => {
        
      
       
-       <div className="collection">
+       <div className="col s12  m8 offset-m2">
        {props.people.map((user) => {
           return (<div  key ={user.id}>
            <UserItem  singleUser={user}/>
         </div>)
        
        })}
-         </div>
+        </div>
 
    
     )

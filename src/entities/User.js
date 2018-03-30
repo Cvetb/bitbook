@@ -4,6 +4,7 @@ class User {
         this.email = user.email;
         this.about = user.about;
         this.id = user.id;
+        this.userId =user.userId;
         this.aboutShort = user.aboutShort;
         this.avatarUrl = user.avatarUrl;
         this.postsCount = user.postsCount;

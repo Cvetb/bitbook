@@ -7,6 +7,8 @@ import CreateNewPost from "./CreateNewPost"
 import NewTextPost from "./NewTextPost"
 import NewVideoPost from "./NewVideoPost"
 import NewImagePost from "./NewImagePost"
+import Header from "../partials/Header";
+import Footer from "../partials/Footer";
 
 
 class FeedPage extends Component {
@@ -24,13 +26,13 @@ class FeedPage extends Component {
 
   fetchPosts = () => {
     postService
-    .fetchPost()
+      .fetchPost()
 
-    .then(postData => {
-      this.setState({
-        posts: postData
+      .then(postData => {
+        this.setState({
+          posts: postData
+        });
       });
-    });
   }
 
   render() {
@@ -38,22 +40,26 @@ class FeedPage extends Component {
 
     return (
       <div>
-          
-        {this.state.posts.map(post => {
-          if (post.type === "text") {
-            return <TextPost post={post} />;
-          } else if (post.type === "image") {
-            return <ImagePost post={post}/>;
-          } else {
-            
-            return <VideoPost post={post} />;
-          }
-        })}
+        <Header />
+        <div>
 
-        <CreateNewPost/>
-        <NewTextPost reloadPage={this.fetchPosts}/>
-        <NewImagePost reloadPage={this.fetchPosts}/>
-        <NewVideoPost reloadPage={this.fetchPosts}/>
+          {this.state.posts.map(post => {
+            if (post.type === "text") {
+              return <TextPost post={post} />;
+            } else if (post.type === "image") {
+              return <ImagePost post={post} />;
+            } else {
+
+              return <VideoPost post={post} />;
+            }
+          })}
+
+          <CreateNewPost />
+          <NewTextPost reloadPage={this.fetchPosts} />
+          <NewImagePost reloadPage={this.fetchPosts} />
+          <NewVideoPost reloadPage={this.fetchPosts} />
+        </div>
+        <Footer />
       </div>
     );
   }

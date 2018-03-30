@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { userService } from "../../services/UserService";
 import UserInfo from "./UserInfo";
+import Header from '../partials/Header';
+import Footer from '../partials/Footer';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: []
     };
   }
   
@@ -15,7 +17,7 @@ class Profile extends Component {
   }
 
   fetchProfile = (id) => {
-    userService.fetchUsers(id).then(myProfile => {
+    userService.fetchUser(id).then(myProfile => {
       this.setState({
         user: myProfile
       });
@@ -26,7 +28,9 @@ class Profile extends Component {
   render() {
     return (
       <div className="row">
+      <Header />
         <UserInfo profile={this.state.user} />
+        <Footer/>
       </div>
     );
   }

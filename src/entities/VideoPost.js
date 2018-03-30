@@ -1,9 +1,9 @@
 import Post from './Post.js';
+
 class VideoPost  extends Post{
     constructor(post) {
         super(post);
-        this.videoUrl = post.videoUrl; 
-       
+        this.videoUrl = post.videoUrl;
     }
 }
 

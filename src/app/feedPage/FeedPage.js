@@ -25,9 +25,7 @@ class FeedPage extends Component {
   }
 
   fetchPosts = () => {
-    postService
-      .fetchPost()
-
+    postService.fetchPost()
       .then(postData => {
         this.setState({
           posts: postData
@@ -36,24 +34,19 @@ class FeedPage extends Component {
   }
 
   render() {
-    const { post } = this.state;
-
     return (
       <div>
         <Header />
         <div>
-
           {this.state.posts.map(post => {
             if (post.type === "text") {
               return <TextPost post={post} />;
             } else if (post.type === "image") {
               return <ImagePost post={post} />;
             } else {
-
               return <VideoPost post={post} />;
             }
           })}
-
           <CreateNewPost />
           <NewTextPost reloadPage={this.fetchPosts} />
           <NewImagePost reloadPage={this.fetchPosts} />

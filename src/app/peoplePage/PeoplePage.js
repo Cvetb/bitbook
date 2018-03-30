@@ -13,12 +13,19 @@ class People extends Component {
             inputValue: '',
             filteredUsers: []
         }
-}
-componentDidMount() {
-  
-    this.fetchPeople();
-    
-}
+    }
+    componentDidMount() {
+
+        this.fetchPeople();
+
+    }
+
+    fetchPeople() {
+        userService.fetchUsers()
+            .then(usersAll => {
+
+                this.setState({
+                    userList: usersAll
 
 fetchPeople() {
     userService.fetchUsers()
@@ -53,12 +60,13 @@ render() {
             <UserList people={this.state.filteredUsers}/>
             </div>
             <Footer />
+
             </div>
-                
-            
-       
-    )
-}
+
+
+
+        )
+    }
 }
 
 

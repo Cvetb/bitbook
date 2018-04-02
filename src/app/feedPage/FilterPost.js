@@ -1,18 +1,23 @@
-import React, { Component } from "react";
-import M from "materialize-css";
+import React from "react";
+
 
 const FilterPost = props => {
   return (
-    <div>
+    <div className="row">
       <br />
-      <a class='dropdown-trigger btn'  data-target='dropdown2'><i class="material-icons right">arrow_drop_down</i>All posts</a>
+      <a className='dropdown-trigger btn  blue lighten-1 col m2 offset-m9'  data-target='drop'><i className="material-icons right">arrow_drop_down</i>All posts</a>
       <br/>
-      <ul id='dropdown2' class='dropdown-content'>
+      <ul id='drop' class='dropdown-content'>
 
-        <li onClick={props.allPosts} >All posts</li>
-        <li onClick={() => props.filter("video")}>Videos</li>
-        <li onClick={() => props.filter("image")}>Images</li>
-        <li onClick={() => props.filter("text")}>Text</li>
+        <li className="indigo darken-4 white-text valign-wrapper" onClick={props.allPosts} >
+        <i className="material-icons left">more_horiz</i>
+                  All posts</li>
+                  <li className="divider" tabindex="-1"></li>
+        <li className="blue lighten-1 white-text valign-wrapper" onClick={() => props.filter("video")}> <i className="material-icons left">music_video</i>Videos</li>
+        <li className="divider" tabindex="-1"></li>
+        <li className="blue lighten-1 white-text valign-wrapper" onClick={() => props.filter("image")}><i className="material-icons left">linked_camera</i>Images</li>
+        <li className="divider" tabindex="-1"></li>
+        <li className="blue lighten-1 white-text valign-wrapper" onClick={() => props.filter("text")}><i className="material-icons left">message</i>Text</li>
       </ul>
     </div>
 

@@ -25,7 +25,7 @@ class FeedPage extends Component {
   componentDidMount() {
     this.fetchPosts();
     var elem = document.querySelector('.dropdown-trigger');
-  var instance = M.Dropdown.init(elem);
+    var instance = M.Dropdown.init(elem);
   
 
   }
@@ -53,11 +53,9 @@ class FeedPage extends Component {
     return (
       <div>
         <Header />
-
+        <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts}/>
         <div className="container">
-          <div className="row">
-            <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts}/>
-          </div>
+          
           {this.state.filteredPosts.map(post => {
             if (post.type === "text") {
               return <TextPost post={post} />;

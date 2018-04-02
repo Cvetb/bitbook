@@ -6,15 +6,18 @@ const TextPost = props => {
 
   return ( 
     <div  className="row">
-      <div className="col s12">
+      
         <div className="card">
-          <br/>
-            {post.text};
-            <div className="card-action ">
-              <p className="left"> <Link to={`/TextPosts/${post.postId}`}>{post.type} Post</Link></p>
-              <p className="right"><Link to={`/TextPosts/${post.postId}`}>{post.postComments} Comments</Link></p>
+         
+          <div className="card small valign-wrapper">
+           <h5 className="center col m12"> {post.text} </h5>
             </div>
-          </div>
+            <div className="card-content">
+              <p className="left chip grey-text text-darken-4"><Link to={`/TextPosts/${post.postId}`} className="grey-text text-darken-3"> {post.type} Post</Link></p>
+              <p className="right chip grey-text text-darken-4"><Link to={`/TextPosts/${post.postId}`} className="grey-text text-darken-3"> {post.postComments} Comments</Link></p>
+            <br/>
+              </div>
+         
         </div>
       </div>
       

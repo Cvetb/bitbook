@@ -6,9 +6,9 @@ import { postService } from "../../services/PostService"
 import TextPost from "../feedPage/TextPost"
 import VideoPost from "../feedPage/VideoPost"
 import ImagePost from "../feedPage/ImagePost"
-import addComment from "./AddComment"
 import AddComment from './AddComment';
-
+import Header from '../partials/Header';
+import Footer from '../partials/Footer';
 
 class SinglePostPage extends React.Component {
     constructor(props) {
@@ -57,15 +57,21 @@ class SinglePostPage extends React.Component {
 
     render() {
         return (
+            <div>
+            <Header/>
             <div className="container">
                 <div>
                     {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
                 </div>
                 <div>
+                <AddComment reloadPage={this.fetchComments} id={this.props.match.params.id} />
                     <CommentList comment={this.state.comment} />
-                    <AddComment reloadPage={this.fetchComments} id={this.props.match.params.id} />
+                   
 
                 </div>
+               
+            </div>
+            <Footer/>
             </div>
         )
     }

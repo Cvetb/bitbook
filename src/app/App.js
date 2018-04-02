@@ -1,8 +1,6 @@
 
 import React, { Component } from 'react';
-import Header from './partials/Header';
 import './App.css';
-import Footer from "./partials/Footer";
 import { Route, Switch } from "react-router-dom";
 import FeedPage from './feedPage/FeedPage';
 import PeoplePage from './peoplePage/PeoplePage';
@@ -21,7 +19,7 @@ class App extends Component {
             <Route exact path ='/' component={FeedPage} />
             <Route path ='/people' component={PeoplePage} />
             <Route path ='/profile' component={ProfilePage} />
-
+            <Route path ='/peoplePage/:id' component={ProfilePage} />
             <Route path ='/:type/:id' component={SinglePostPage} />
            
 

@@ -9,12 +9,15 @@ const ImagePost = props => {
     <div className="row">
       <div className="col s12">
         <div className="card">
+        <div className="card">
+            <img alt="" width="90%" src={post.imageUrl} />
+            </div>
+            <div className="card-content">
+            
+            <p className="left chip"><Link to = {`/ImagePosts/${post.postId}`} className="grey-text text-darken-3">{post.type} Post</Link></p>
+            <p className="right chip"><Link to = {`/ImagePosts/${post.postId}`} className="grey-text text-darken-3">{post.postComments} Comments</Link></p>
           
-            <img alt="" width="100%" src={post.imageUrl} />
-            <div className="card-action">
-            <p className="left"><Link to = {`/ImagePosts/${post.postId}`}>{post.type} Post</Link></p>
-            <p className="right"><Link to = {`/ImagePosts/${post.postId}`}>{post.postComments} Comments</Link></p>
-          </div>
+          <br/>  </div>
           </div>
          
         </div>

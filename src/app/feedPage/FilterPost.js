@@ -1,45 +1,24 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 
-class FilterPost extends Component {
-  componentDidMount() {
-    var elem = document.querySelector(".dropdown-trigger");
-    var instance = M.Dropdown.init(elem);
-  }
+const FilterPost = props => {
+  return (
+    <div>
+      <br />
+      <a class='dropdown-trigger btn'  data-target='dropdown2'><i class="material-icons right">arrow_drop_down</i>All posts</a>
+      <br/>
+      <ul id='dropdown2' class='dropdown-content'>
 
-  render() {
-    return (
-      <div className="right">
-        <a className="dropdown-trigger btn" data-target="dropdown1">
-          All posts
-        </a>
+        <li onClick={props.allPosts} >All posts</li>
+        <li onClick={() => props.filter("video")}>Videos</li>
+        <li onClick={() => props.filter("image")}>Images</li>
+        <li onClick={() => props.filter("text")}>Text</li>
+      </ul>
+    </div>
 
-        <ul id="dropdown1" className="dropdown-content">
-          <li>
-            <a>one</a>
-          </li>
-
-          <li className="divider" tabindex="-1" />
-          <li>
-            <a>
-              {" "}
-              <i className="material-icons">video_library</i>Videos
-            </a>
-          </li>
-          <li>
-            <a>
-              <i className="material-icons">image</i>Images
-            </a>
-          </li>
-          <li>
-            <a>
-              <i className="material-icons">text_format</i>Text
-            </a>
-          </li>
-        </ul>
-      </div>
-    );
-  }
-}
+ 
+        
+  );
+};
 
 export default FilterPost;

@@ -20,12 +20,7 @@ class People extends Component {
 
     }
 
-    fetchPeople() {
-        userService.fetchUsers()
-            .then(usersAll => {
-
-                this.setState({
-                    userList: usersAll
+    
 
 fetchPeople() {
     userService.fetchUsers()

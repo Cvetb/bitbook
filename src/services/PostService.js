@@ -76,8 +76,8 @@ class PostService {
     
   }
 
-  singleTextPost(id){
-    return fetch(`http://bitbookapi.azurewebsites.net/api/TextPosts/${id}`, {
+  singlePost(id){
+    return fetch(`http://bitbookapi.azurewebsites.net/api/Posts/${id}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ class PostService {
       
   })
       .then((response) => response.json())
-      .then((postItem) => new TextPost(postItem))
+      .then((postItem) => new Post (postItem))
   }
 
 

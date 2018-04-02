@@ -7,13 +7,13 @@ const ImagePost = props => {
   return (
     
     <div className="row">
-      <div className="col s12 m8 offset-m2">
+      <div className="col s12">
         <div className="card">
           
             <img alt="" width="100%" src={post.imageUrl} />
             <div className="card-action">
-            <p className="left"><Link to = {`/postPage/${post.postId}`}>{post.type} Post</Link></p>
-            <p className="right"><Link to = {`/postPage/${post.postId}`}>{post.postComments} Comments</Link></p>
+            <p className="left"><Link to = {`/ImagePosts/${post.postId}`}>{post.type} Post</Link></p>
+            <p className="right"><Link to = {`/ImagePosts/${post.postId}`}>{post.postComments} Comments</Link></p>
           </div>
           </div>
          

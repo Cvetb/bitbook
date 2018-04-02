@@ -6,6 +6,8 @@ import { postService } from "../../services/PostService"
 import TextPost from "../feedPage/TextPost"
 import VideoPost from "../feedPage/VideoPost"
 import ImagePost from "../feedPage/ImagePost"
+import addComment from "./AddComment"
+import AddComment from './AddComment';
 
 
 class SinglePostPage extends React.Component {
@@ -13,56 +15,57 @@ class SinglePostPage extends React.Component {
         super(props);
         this.state = {
             comment: [],
-            singlePost: []
+            singlePost: {},
+            loaded: false
         }
     }
     componentDidMount() {
         this.fetchComments(this.props.match.params.id);
-        this.fetchSinglePost(this.props.match.params.id);
+        this.fetchSinglePost(this.props.match.params.id, this.props.match.params.type);
 
     }
 
-    fetchSinglePost(id) {
-        postService.singlePost(id)
+    fetchSinglePost(id, type) {
+        postService.singlePost(id, type)
             .then(singlePost => {
                 this.setState({
-                    singlePost: singlePost
+                    singlePost,
+                    loaded: true
                 })
-                console.log(singlePost);
-                
-                
             })
     }
 
-    fetchComments(id) {
+    fetchComments = (id) => {
         commentService.fetchComment(id)
             .then(commentsAll => {
                 this.setState({
                     comment: commentsAll
                 })
-            
+
             })
     }
 
     displayPost = () => {
         if (this.state.singlePost.type === "text") {
-            return <TextPost singlePost={this.state.singlePost} />;
+            return <TextPost post={this.state.singlePost} />;
         } else if (this.state.singlePost.type === "image") {
-            return <ImagePost singlePost={this.state.singlePost} />;
+            return <ImagePost post={this.state.singlePost} />;
         } else {
-            return <VideoPost singlePost={this.state.singlePost} />;
+            return <VideoPost post={this.state.singlePost} />;
         }
     }
 
     render() {
         return (
-            <div>
-            <div>
-               {this.displayPost}
-            </div>
-            <div>
-                <CommentList comment={this.state.comment} />
-            </div>
+            <div className="container">
+                <div>
+                    {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
+                </div>
+                <div>
+                    <CommentList comment={this.state.comment} />
+                    <AddComment reloadPage={this.fetchComments} id={this.props.match.params.id} />
+
+                </div>
             </div>
         )
     }

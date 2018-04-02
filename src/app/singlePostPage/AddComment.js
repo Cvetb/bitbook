@@ -30,10 +30,10 @@ class addComment extends React.Component {
 
     render() {
         return (
-            <div class="row">
-                <form class="col s12">
-                    <div class="row">
-                        <div class="input-field">
+            <div className="row">
+                <form className="col s12">
+                    <div className="row">
+                        <div className="input-field">
                             <input placeholder="Add Comment" id="first_name" type="text" className="validate" value={this.state.inputValue} onChange={this.handleInputChange} />
                             <button className="waves-effect waves-light btn" onClick={this.clickHandler}>Submit</button>
                         </div>

@@ -35,9 +35,9 @@ class FeedPage extends Component {
 
   render() {
     return (
-      <div>
+      <div >
         <Header />
-        <div>
+        <div className="container">
           {this.state.posts.map(post => {
             if (post.type === "text") {
               return <TextPost post={post} />;

@@ -76,8 +76,8 @@ class PostService {
     
   }
 
-  singleTextPost(id){
-    return fetch(`http://bitbookapi.azurewebsites.net/api/TextPosts/${id}`, {
+  singlePost(id, type){
+    return fetch(`http://bitbookapi.azurewebsites.net/api/${type}/${id}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
@@ -87,37 +87,16 @@ class PostService {
       
   })
       .then((response) => response.json())
-      .then((postItem) => new TextPost(postItem))
-  }
-
-
-  singleImagePost(id){
-    return fetch(`http://bitbookapi.azurewebsites.net/api/ImagePosts/${id}`, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Key": "bitbook",
-          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+      .then((postItem) => {
+        if (postItem.type === "text") {
+          return new TextPost(postItem);
+        } else if (postItem.type === "image") {
+          return new ImagePost(postItem);
+        } else if (postItem.type === "video") {
+          return new VideoPost(postItem);
+        }
       }
-      
-  })
-      .then((response) => response.json())
-      .then((postItem) => new ImagePost(postItem))
-  }
-
-  
-  singleVideoPost(id){
-    return fetch(`http://bitbookapi.azurewebsites.net/api/VideoPosts/${id}`, {
-      method: "GET",
-      headers: {
-          "Content-Type": "application/json",
-          "Key": "bitbook",
-          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
-      }
-      
-  })
-      .then((response) => response.json())
-      .then((postItem) => new VideoPost(postItem))
+    )
   }
 }
 

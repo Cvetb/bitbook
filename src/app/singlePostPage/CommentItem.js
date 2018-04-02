@@ -8,7 +8,7 @@ const CommentItem = (props) => {
         <div className="collection">
         <ul className="collection-item avatar" >
             <li>
-                <img className="circle" alt="" src="#"/>
+                <img className="circle" alt="" src=""/>
                 <p>{props.singleComment.body}</p>
             </li>
             </ul>

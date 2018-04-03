@@ -13,7 +13,7 @@ const TextPost = props => {
            <h5 className="center col m12"> {post.text} </h5>
             </div>
             <div className="card-content">
-              <p className="left chip grey-text text-darken-4"><Link to={`/TextPosts/${post.postId}`} className="grey-text text-darken-3"> {post.type} Post</Link></p>
+              <p className="left chip grey-text text-darken-4 "><Link to={`/TextPosts/${post.postId}`} className="grey-text text-darken-3"> {post.type} Post</Link></p>
               <p className="right chip grey-text text-darken-4"><Link to={`/TextPosts/${post.postId}`} className="grey-text text-darken-3"> {post.postComments} Comments</Link></p>
             <br/>
               </div>

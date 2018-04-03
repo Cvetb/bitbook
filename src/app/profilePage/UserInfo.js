@@ -12,14 +12,14 @@ const UserInfo = props => {
           <h5>{props.profile.name}</h5>
           <p> {props.profile.about}</p>
           <div className="chip">
-            <img src="" alt="P" className="blue lighten-1 white-text" />
+            <img src="" alt="" className="blue lighten-1 white-text" />
             {props.profile.postsCount} posts
           </div>
-          <div className="chip">
+              <div className="chip">
             
-            <img src="" alt="C" className="blue lighten-1 white-text" />
+            <img src="" alt="" className="blue lighten-1 white-text" />
             {props.profile.commentsCount} comments
-          </div>
+             </div>
 
           <br />
         </div>

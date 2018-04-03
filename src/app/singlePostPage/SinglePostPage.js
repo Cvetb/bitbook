@@ -1,80 +1,82 @@
-import React from 'react';
+import React from "react";
 
 import CommentList from "./CommentList";
-import { commentService } from "../../services/CommentService"
-import { postService } from "../../services/PostService"
-import TextPost from "../feedPage/TextPost"
-import VideoPost from "../feedPage/VideoPost"
-import ImagePost from "../feedPage/ImagePost"
-import AddComment from './AddComment';
-import Header from '../partials/Header';
-import Footer from '../partials/Footer';
+import { commentService } from "../../services/CommentService";
+import { postService } from "../../services/PostService";
+import TextPost from "../feedPage/TextPost";
+import VideoPost from "../feedPage/VideoPost";
+import ImagePost from "../feedPage/ImagePost";
+import AddComment from "./AddComment";
+import Header from "../partials/Header";
+import Footer from "../partials/Footer";
 
 class SinglePostPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            comment: [],
-            singlePost: {},
-            loaded: false
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: [],
+      singlePost: {},
+      loaded: false
+    };
+  }
+  componentDidMount() {
+    this.fetchComments(this.props.match.params.id);
+    this.fetchSinglePost(
+      this.props.match.params.id,
+      this.props.match.params.type
+    );
+  }
+
+  fetchSinglePost(id, type) {
+    postService.singlePost(id, type).then(singlePost => {
+      this.setState({
+        singlePost,
+        loaded: true
+      });
+    });
+  }
+
+  fetchComments = id => {
+    commentService.fetchComment(id).then(commentsAll => {
+      this.setState({
+        comment: commentsAll
+      });
+    });
+  };
+
+  displayPost = () => {
+    if (this.state.singlePost.type === "text") {
+      return <TextPost post={this.state.singlePost} />;
+    } else if (this.state.singlePost.type === "image") {
+      return <ImagePost post={this.state.singlePost} />;
+    } else {
+      return <VideoPost post={this.state.singlePost} />;
     }
-    componentDidMount() {
-        this.fetchComments(this.props.match.params.id);
-        this.fetchSinglePost(this.props.match.params.id, this.props.match.params.type);
+  };
 
-    }
+  
 
-    fetchSinglePost(id, type) {
-        postService.singlePost(id, type)
-            .then(singlePost => {
-                this.setState({
-                    singlePost,
-                    loaded: true
-                })
-            })
-    }
-
-    fetchComments = (id) => {
-        commentService.fetchComment(id)
-            .then(commentsAll => {
-                this.setState({
-                    comment: commentsAll
-                })
-
-            })
-    }
-
-    displayPost = () => {
-        if (this.state.singlePost.type === "text") {
-            return <TextPost post={this.state.singlePost} />;
-        } else if (this.state.singlePost.type === "image") {
-            return <ImagePost post={this.state.singlePost} />;
-        } else {
-            return <VideoPost post={this.state.singlePost} />;
-        }
-    }
-
-    render() {
-        return (
-            <div>
-            <Header/>
-            <div className="container">
-                <div>
-                    {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
-                </div>
-                <div>
-                <AddComment reloadPage={this.fetchComments} id={this.props.match.params.id} />
-                    <CommentList comment={this.state.comment} />
-                   
-
-                </div>
-               
-            </div>
-            <Footer/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <Header />
+        <div className="container">
+          <div>
+            {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
+          </div>
+          <div>
+            <AddComment
+              reloadPage={this.fetchComments}
+              id={this.props.match.params.id}
+              
+            />
+            <CommentList comment={this.state.comment} />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default SinglePostPage;

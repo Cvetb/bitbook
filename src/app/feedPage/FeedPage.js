@@ -7,8 +7,7 @@ import CreateNewPost from "./CreateNewPost";
 import NewTextPost from "./NewTextPost";
 import NewVideoPost from "./NewVideoPost";
 import NewImagePost from "./NewImagePost";
-import Header from "../partials/Header";
-import Footer from "../partials/Footer";
+
 import FilterPost from "./FilterPost";
 import M from "materialize-css";
 
@@ -23,15 +22,17 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    this.fetchPosts();
+    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
+    
+    this.fetchPosts(sessionId);
     var elem = document.querySelector('.dropdown-trigger');
-    var instance = M.Dropdown.init(elem);
+     M.Dropdown.init(elem);
   
 
   }
 
-  fetchPosts = () => {
-    postService.fetchPost().then(postData => {
+  fetchPosts = (sessionId) => {
+    postService.fetchPost(sessionId).then(postData => {
       this.setState({
         posts: postData,
         filteredPosts: postData
@@ -40,7 +41,6 @@ class FeedPage extends Component {
   };
 
   filterPosts = (postType) => {
-    console.log(postType)
     this.setState({
       filteredPosts: this.state.posts.filter(el => {
         return el.type === postType;
@@ -52,7 +52,7 @@ class FeedPage extends Component {
   render() {
     return (
       <div>
-        <Header />
+      
         <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts}/>
         <div className="container">
           
@@ -71,7 +71,7 @@ class FeedPage extends Component {
           <NewImagePost reloadPage={this.fetchPosts} />
           <NewVideoPost reloadPage={this.fetchPosts} />
         </div>
-        <Footer />
+     
       </div>
     );
   }

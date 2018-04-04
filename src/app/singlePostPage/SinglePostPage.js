@@ -7,8 +7,7 @@ import TextPost from "../feedPage/TextPost";
 import VideoPost from "../feedPage/VideoPost";
 import ImagePost from "../feedPage/ImagePost";
 import AddComment from "./AddComment";
-import Header from "../partials/Header";
-import Footer from "../partials/Footer";
+
 
 class SinglePostPage extends React.Component {
   constructor(props) {
@@ -20,15 +19,16 @@ class SinglePostPage extends React.Component {
     };
   }
   componentDidMount() {
-    this.fetchComments(this.props.match.params.id);
+    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
+    this.fetchComments(this.props.match.params.id, sessionId);
     this.fetchSinglePost(
       this.props.match.params.id,
-      this.props.match.params.type
+      this.props.match.params.type. sessionId
     );
   }
 
-  fetchSinglePost(id, type) {
-    postService.singlePost(id, type).then(singlePost => {
+  fetchSinglePost(id, type,sessionId) {
+    postService.singlePost(id, type,sessionId).then(singlePost => {
       this.setState({
         singlePost,
         loaded: true
@@ -36,8 +36,8 @@ class SinglePostPage extends React.Component {
     });
   }
 
-  fetchComments = id => {
-    commentService.fetchComment(id).then(commentsAll => {
+  fetchComments = (id, sessionId )=> {
+    commentService.fetchComment(id, sessionId).then(commentsAll => {
       this.setState({
         comment: commentsAll
       });
@@ -59,7 +59,7 @@ class SinglePostPage extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+     
         <div className="container">
           <div>
             {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
@@ -73,7 +73,7 @@ class SinglePostPage extends React.Component {
             <CommentList comment={this.state.comment} />
           </div>
         </div>
-        <Footer />
+      
       </div>
     );
   }

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { userService } from "../../services/UserService";
 import UserInfo from "./UserInfo";
-import Header from '../partials/Header';
-import Footer from '../partials/Footer';
 
 class Profile extends Component {
   constructor(props) {
@@ -13,24 +11,24 @@ class Profile extends Component {
   }
   
   componentDidMount() {
-    this.fetchProfile(this.props.match.params.id);
+    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
+    this.fetchProfile(this.props.match.params.id, sessionId);
   }
 
-  fetchProfile = (id) => {
-    userService.fetchUser(id).then(myProfile => {
+  fetchProfile = (id, sessionId) => {
+    userService.fetchUser(id, sessionId).then(myProfile => {
       this.setState({
         user: myProfile
       });
-         //console.log(myProfile);
     });
   };
 
   render() {
     return (
       <div className="row">
-      <Header />
+     
         <UserInfo profile={this.state.user} />
-        <Footer/>
+       
       </div>
     );
   }

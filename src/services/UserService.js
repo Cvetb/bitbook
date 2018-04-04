@@ -1,12 +1,14 @@
 import User from '../entities/User';
+import { SERVER_KEY } from '../shared/constants';
+
 class UserService {
-fetchUsers(){
+fetchUsers(sessionId){
     return fetch("http://bitbookapi.azurewebsites.net/api/users", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Key": "bitbook",
-            "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+            "Key": SERVER_KEY,
+            "SessionId": sessionId
         }
         })
     
@@ -18,13 +20,13 @@ fetchUsers(){
 
 
 
-fetchUser(id){
+fetchUser(id, sessionId){
     return fetch(`http://bitbookapi.azurewebsites.net/api/users/${id}`, {
         method: "GET",
         headers:{
             "Content-Type": "application/json",
-            "Key": "bitbook" ,
-            "SessionId" : "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+            "Key": SERVER_KEY,
+            "SessionId": sessionId
         }
     })
     

@@ -2,7 +2,6 @@ import React from 'react';
 
 
 const CommentItem = (props) => {
-    console.log(props)
     return (
         <div className="">
       

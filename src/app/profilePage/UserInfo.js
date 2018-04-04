@@ -1,8 +1,6 @@
 import React from "react";
 
 const UserInfo = props => {
-  console.log(props);
-
   return (
     <div className="row">
       <div className="col s12 m8 offset-m2">

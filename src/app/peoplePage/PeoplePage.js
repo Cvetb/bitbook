@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { userService } from "../../services/UserService";
 import UserList from "./UserList";
-import Header from '../partials/Header';
-import Footer from '../partials/Footer';
+
 import SearchBar from './Search';
 
 class People extends Component {
@@ -15,15 +14,15 @@ class People extends Component {
         }
     }
     componentDidMount() {
-
-        this.fetchPeople();
+        const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
+        this.fetchPeople(sessionId);
 
     }
 
     
 
-fetchPeople() {
-    userService.fetchUsers()
+fetchPeople(sessionId) {
+    userService.fetchUsers(sessionId)
       .then(usersAll => {
          
           this.setState({
@@ -49,12 +48,12 @@ render() {
    
     return (
         <div>
-            <Header />
+           
             <div className="row">
             <SearchBar  handleChange={this.handleChange} inputValue={this.state.inputValue}/>
             <UserList people={this.state.filteredUsers}/>
             </div>
-            <Footer />
+         
 
             </div>
 

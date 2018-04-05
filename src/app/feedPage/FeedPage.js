@@ -22,47 +22,41 @@ class FeedPage extends Component {
   }
 
   componentDidMount() {
-    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
-    
-    this.fetchPosts(sessionId);
-    var elem = document.querySelector('.dropdown-trigger');
-     M.Dropdown.init(elem);
-  
-
+    this.fetchPosts();
+    var el = document.querySelector(".dropdown-trigger");
+    M.Dropdown.init(el);
   }
 
-  fetchPosts = (sessionId) => {
-    postService.fetchPost(sessionId).then(postData => {
-      this.setState({
-        posts: postData,
-        filteredPosts: postData
-      });
+  fetchPosts = () => {
+    postService.fetchPost()
+      .then(postData => {
+        this.setState({
+          posts: postData,
+          filteredPosts: postData
+        });
     });
   };
 
-  filterPosts = (postType) => {
+  filterPosts = postType => {
     this.setState({
       filteredPosts: this.state.posts.filter(el => {
         return el.type === postType;
       })
-    })
-
+    });
   };
 
   render() {
     return (
       <div>
-      
-        <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts}/>
+        <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts} />
         <div className="container">
-          
           {this.state.filteredPosts.map(post => {
             if (post.type === "text") {
-              return <TextPost post={post} />;
+              return <TextPost post={post} key={post.postId} />;
             } else if (post.type === "image") {
-              return <ImagePost post={post} />;
+              return <ImagePost post={post} key={post.postId} />;
             } else {
-              return <VideoPost post={post} />;
+              return <VideoPost post={post} key={post.postId} />;
             }
           })}
 
@@ -71,7 +65,6 @@ class FeedPage extends Component {
           <NewImagePost reloadPage={this.fetchPosts} />
           <NewVideoPost reloadPage={this.fetchPosts} />
         </div>
-     
       </div>
     );
   }

@@ -1,18 +1,18 @@
 import TextPost from "../entities/TextPost";
 import VideoPost from "../entities/VideoPost";
 import ImagePost from "../entities/ImagePost";
-
+import { authService } from './AuthenticationService';
 import { SERVER_KEY } from '../shared/constants';
 
 
 class PostService {
-  fetchPost(sessionId) {
+  fetchPost() {
     return fetch("http://bitbookapi.azurewebsites.net/api/Posts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Key": SERVER_KEY,
-        "SessionId": sessionId
+        "SessionId": authService.getSessionId()
        
       }
     })
@@ -28,17 +28,18 @@ class PostService {
           } else if (post.type === "video") {
             return new VideoPost(post);
           }
+          
         })
       });
   }
 
-  newTextPost(text, sessionId) {
+  newTextPost(text) {
     return fetch("http://bitbookapi.azurewebsites.net/api/TextPosts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Key": SERVER_KEY,
-        "SessionId": sessionId
+        "SessionId": authService.getSessionId()
        
       },
       body: JSON.stringify({
@@ -48,13 +49,13 @@ class PostService {
     
   }
 
-  newImagePost(imageUrl, sessionId) {
+  newImagePost(imageUrl) {
     return fetch("http://bitbookapi.azurewebsites.net/api/ImagePosts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Key": SERVER_KEY,
-        "SessionId": sessionId
+        "SessionId": authService.getSessionId()
       },
       body: JSON.stringify({
         "imageUrl": imageUrl
@@ -64,13 +65,13 @@ class PostService {
   }
 
 
-  newVideoPost(videoUrl, sessionId) {
+  newVideoPost(videoUrl) {
     return fetch("http://bitbookapi.azurewebsites.net/api/VideoPosts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Key": SERVER_KEY,
-        "SessionId": sessionId
+        "SessionId": authService.getSessionId()
         
       },
       body: JSON.stringify({
@@ -80,14 +81,13 @@ class PostService {
     
   }
 
-  singlePost(id, type, sessionId){
+  singlePost(id, type){
     return fetch(`http://bitbookapi.azurewebsites.net/api/${type}/${id}`, {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
           "Key": SERVER_KEY,
-          "SessionId": sessionId
-         
+          "SessionId": authService.getSessionId()
       }
       
   })
@@ -104,13 +104,13 @@ class PostService {
     )
   }
 
-  deletePost(id, sessionId){
+  deletePost(id){
     return fetch(`http://bitbookapi.azurewebsites.net/api/Posts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "Key": SERVER_KEY,
-        "SessionId": sessionId
+        "SessionId": authService.getSessionId()
         
     }
   

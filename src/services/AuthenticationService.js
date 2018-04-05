@@ -1,5 +1,6 @@
 
 import { SERVER_KEY } from '../shared/constants';
+import { userService } from './UserService';
 class Auth {
   login(user, pass) {
     return fetch("http://bitbookapi.azurewebsites.net/api/login", {
@@ -15,6 +16,13 @@ class Auth {
     })
       .then(response => {
         return response.json();
+      })
+      .then(response => {
+        sessionStorage.setItem('userInfo', JSON.stringify(response));
+        userService.fetchProfile()
+          .then(response => {
+            sessionStorage.setItem('userId', response.id)
+          })
       })
   }
 
@@ -38,6 +46,11 @@ class Auth {
 
   logout = () => {
     sessionStorage.removeItem('userInfo');
+    sessionStorage.removeItem('userId');
+  }
+
+  getSessionId() {
+    return JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
   }
 }
 

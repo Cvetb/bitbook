@@ -25,12 +25,16 @@ footer {
   color:red;
 }
 #drop{
- position: relative;
- top: -40px;
- right: 20px;
+ position: absolute;
+ top: -30px;
+
 }
 
 #inputimg{
   margin-bottom: 5px;
 }
-  
+  .progress{
+    margin-top: 0;
+    height: 5px;
+    
+  }

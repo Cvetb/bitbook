@@ -5,7 +5,7 @@ const FilterPost = props => {
   return (
     <div className="row">
       <br />
-      <a className='dropdown-trigger btn blue lighten-1 col m1 offset-m10'  data-target='drop'><i className="material-icons right">arrow_drop_down</i>All posts</a>
+      <a className='dropdown-trigger btn blue lighten-1 col m2 offset-m9'  data-target='drop'><i className="material-icons right">arrow_drop_down</i>All posts</a>
       <br/>
       <ul id='drop' className='dropdown-content'>
 

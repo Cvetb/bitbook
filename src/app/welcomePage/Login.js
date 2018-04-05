@@ -15,8 +15,8 @@ const LoginForm = (props) => {
 
       <TabPanel>
         <div className="input-field">
-          <span className="prefix"><i className="material-icons blue-grey-text text-darken-4">email</i></span>
-          <input name="loginEmail" onChange={handleChange} placeholder="email" type="email" className="validate" />
+          <span className="prefix"><i className="material-icons blue-grey-text text-darken-4">person</i></span>
+          <input name="loginEmail" onChange={handleChange} placeholder="name" type="text" className="validate" />
        
           <br/>
           <span className="prefix"><i className="material-icons blue-grey-text text-darken-4">lock_outline</i></span>

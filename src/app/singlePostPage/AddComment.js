@@ -2,8 +2,9 @@ import React from 'react';
 import { commentService } from '../../services/CommentService';
 import { postService } from "../../services/PostService";
 
-class addComment extends React.Component {
+class AddComment extends React.Component {
     constructor(props) {
+        console.log(props)
         super(props);
 
         this.state = {
@@ -48,7 +49,7 @@ class addComment extends React.Component {
                         <div className="input-field">
                             <input placeholder="Add Comment" id="first_name" type="text" className="validate col m10" value={this.state.inputValue} onChange={this.handleInputChange} />
                             <span className="btn-floating btn-large" onClick={this.clickHandler}><i className="large material-icons left">send</i></span>
-                            <a class="btn-floating btn-large waves-effect waves-light red right" onClick={this.deletePosts}><i class="material-icons">delete</i></a>
+                            <a className="btn-floating btn-large waves-effect waves-light red right" onClick={this.deletePosts}><i className="material-icons">delete</i></a>
                         </div>
                     </div>
                 </form>
@@ -58,4 +59,4 @@ class addComment extends React.Component {
 } 
 
 
-export default addComment;
+export default AddComment;

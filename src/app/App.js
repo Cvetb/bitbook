@@ -19,34 +19,36 @@ class App extends Component {
   }
 
   componentDidMount() {
-    if (sessionStorage.getItem('userInfo')) {
+    if (sessionStorage.getItem("userInfo")) {
       this.setState({
         isLoggedIn: true
-      })
+      });
     }
   }
 
-  isLoggedInHandler = (isLoggedIn) => {
+  isLoggedInHandler = isLoggedIn => {
+    console.log("is logged in: " + isLoggedIn);
     this.setState({
       isLoggedIn
     });
   };
 
   render() {
-    console.log(this.state.isLoggedIn)
     return (
       <div className="App">
-        <Header loggedIn={this.isLoggedInHandler}
-        />
         {this.state.isLoggedIn ? (
-          <Switch>
-            <Route exact path="/" component={FeedPage} />
-            <Route path="/people" component={PeoplePage} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/peoplePage/:id" component={ProfilePage} />
-            <Redirect from="/login" to="/" />
-            <Route path="/:type/:id" component={SinglePostPage} />
-          </Switch>
+          <div>
+            <Header loggedIn={this.isLoggedInHandler} />
+            <Switch>
+              <Route exact path="/" component={FeedPage} />
+              <Route path="/people" component={PeoplePage} />
+              <Route path="/profile" component={ProfilePage} />
+              <Route path="/:type/:id" component={SinglePostPage} />
+              <Route path="/profile/:id" component={ProfilePage} />
+              
+              <Redirect from="/login" to="/" />
+            </Switch>
+          </div>
         ) : (
           <Switch>
             <Route

@@ -1,18 +1,16 @@
 class User {
     constructor(user){
-        this.name = user.name;
-        this.surname=user.surname;
-        this.username = user.username;
-        this.sessionId=user.sessionId;
-        this.email = user.email;
-        this.about = user.about;
-        this.id = user.id;
-        this.userId =user.userId;
         this.aboutShort = user.aboutShort;
         this.avatarUrl = user.avatarUrl;
+        this.id = user.id;
+        this.name = user.name;
+
+        this.email = user.email;
+        this.about = user.about;
+        this.userId =user.userId;
         this.postsCount = user.postsCount;
-        this.commentsCount = user.commentsCount;
-        
+        this.commentsCount = user.commentsCount;  
+        this.lastPostDate = user.lastPostDate;
     }
 }
 

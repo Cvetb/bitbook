@@ -46,25 +46,27 @@ class WelcomePage extends Component {
 
   clickLogin = () => {
     authService.login(this.state.loginEmail, this.state.loginPassword)
-        .then(userInfo => {
-            console.log("RESPONSE", userInfo)
-            if (userInfo) {
-                this.props.loggedIn(true);
-                sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-                window.location = "/";
-            }
-        });
+      .then(userInfo => {
+        this.props.loggedIn(true);
+
+        window.location = "/";
+      });
   };
 
   clickRegister = () => {
-    authService.register(this.state.personName, this.state.registerPassword, this.state.personName, this.state.registerEmail)
-    .then(response => {
+    authService
+      .register(
+        this.state.personName,
+        this.state.registerPassword,
+        this.state.personName,
+        this.state.registerEmail
+      )
+      .then(response => {
         if (response) {
-            window.location = "/login";
+          window.location = "/login";
         }
-    });
-    
-  }
+      });
+  };
 
   render() {
     return (
@@ -74,7 +76,7 @@ class WelcomePage extends Component {
         <br />
         <div className="row">
           <div className="col m6 blue-grey-text text-darken-3">
-            <h4>BitBook Login</h4>
+            <h4>Bitbook Login</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

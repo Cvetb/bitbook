@@ -3,11 +3,11 @@ import React from "react";
 import CommentList from "./CommentList";
 import { commentService } from "../../services/CommentService";
 import { postService } from "../../services/PostService";
+import { userService } from "../../services/UserService";
 import TextPost from "../feedPage/TextPost";
 import VideoPost from "../feedPage/VideoPost";
 import ImagePost from "../feedPage/ImagePost";
 import AddComment from "./AddComment";
-
 
 class SinglePostPage extends React.Component {
   constructor(props) {
@@ -15,20 +15,23 @@ class SinglePostPage extends React.Component {
     this.state = {
       comment: [],
       singlePost: {},
-      loaded: false
+      loaded: false,
+     
     };
   }
+
   componentDidMount() {
-    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
-    this.fetchComments(this.props.match.params.id, sessionId);
+    const sessionId = JSON.parse(sessionStorage.getItem("userInfo")).sessionId;
+    this.fetchComments(this.props.match.params.id);
     this.fetchSinglePost(
       this.props.match.params.id,
-      this.props.match.params.type. sessionId
+      this.props.match.params.type
     );
   }
 
-  fetchSinglePost(id, type,sessionId) {
-    postService.singlePost(id, type,sessionId).then(singlePost => {
+  fetchSinglePost(id, type) {
+    postService.singlePost(id, type)
+    .then(singlePost => {
       this.setState({
         singlePost,
         loaded: true
@@ -36,8 +39,8 @@ class SinglePostPage extends React.Component {
     });
   }
 
-  fetchComments = (id, sessionId )=> {
-    commentService.fetchComment(id, sessionId).then(commentsAll => {
+  fetchComments = id => {
+    commentService.fetchComment(id).then(commentsAll => {
       this.setState({
         comment: commentsAll
       });
@@ -54,26 +57,27 @@ class SinglePostPage extends React.Component {
     }
   };
 
-  
-
   render() {
     return (
-      <div>
-     
-        <div className="container">
-          <div>
-            {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
-          </div>
+      <div className="container">
+        <div>
+          {this.state.loaded ? (
+            this.displayPost()
+          ) : (
+            <div className="progress amber lighten-3">
+              <div className="indeterminate  amber" />
+            </div>
+          )}
+        </div>
+        <div>
           <div>
             <AddComment
               reloadPage={this.fetchComments}
               id={this.props.match.params.id}
-              
             />
             <CommentList comment={this.state.comment} />
           </div>
         </div>
-      
       </div>
     );
   }

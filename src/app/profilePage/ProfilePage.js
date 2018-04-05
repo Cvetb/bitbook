@@ -6,29 +6,50 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: []
+      userInfo: {}
     };
   }
   
   componentDidMount() {
-    const sessionId = JSON.parse(sessionStorage.getItem('userInfo')).sessionId;
-    this.fetchProfile(this.props.match.params.id, sessionId);
+    this.getUser(this.props);
+  }
+  
+  getUser = (props) => {
+    if(props.match.params.id){
+      this.fetchProfile(props.match.params.id);
+    } else {
+      this.fetchMyProfile();
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    this.getUser(nextProps);
   }
 
-  fetchProfile = (id, sessionId) => {
-    userService.fetchUser(id, sessionId).then(myProfile => {
+  fetchProfile = (id) => {
+    userService.fetchUser(id).then(userProfile => {
       this.setState({
-        user: myProfile
+        userInfo: userProfile,
+        isMyProfile: false
       });
     });
   };
 
+  fetchMyProfile = () => {
+    userService.fetchProfile()
+    .then(myProfile => {
+      this.setState({
+        userInfo: myProfile,
+        isMyProfile: true
+      });
+    });
+  };
+
+
   render() {
     return (
+      
       <div className="row">
-     
-        <UserInfo profile={this.state.user} />
-       
+        <UserInfo profile={this.state.userInfo} />
       </div>
     );
   }

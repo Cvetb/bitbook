@@ -1,14 +1,15 @@
 import Comment from '../entities/Comment'
+import { authService } from './AuthenticationService';
 import { SERVER_KEY } from '../shared/constants';
 
 class CommentService {
-    fetchComment(id, sessionId) {
+    fetchComment(id) {
       return fetch(`http://bitbookapi.azurewebsites.net/api/Comments?postId=${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Key": SERVER_KEY,
-          "SessionId": sessionId
+          "SessionId": authService.getSessionId()
          
         }
       })
@@ -19,13 +20,13 @@ class CommentService {
     }
   
     
-    newComment(data, id, sessionId) {
+    newComment(data, id) {
         return fetch('http://bitbookapi.azurewebsites.net/api/Comments', {
         method: "POST",
         headers:{
           "Content-Type": "application/json",
           "Key": SERVER_KEY,
-          "SessionId": sessionId
+          "SessionId": authService.getSessionId()
          
         },
         body: JSON.stringify({

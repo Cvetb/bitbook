@@ -3,12 +3,11 @@ import React from "react";
 import CommentList from "./CommentList";
 import { commentService } from "../../services/CommentService";
 import { postService } from "../../services/PostService";
+import { userService } from "../../services/UserService";
 import TextPost from "../feedPage/TextPost";
 import VideoPost from "../feedPage/VideoPost";
 import ImagePost from "../feedPage/ImagePost";
 import AddComment from "./AddComment";
-import Header from "../partials/Header";
-import Footer from "../partials/Footer";
 
 class SinglePostPage extends React.Component {
   constructor(props) {
@@ -16,10 +15,13 @@ class SinglePostPage extends React.Component {
     this.state = {
       comment: [],
       singlePost: {},
-      loaded: false
+      loaded: false,
+     
     };
   }
+
   componentDidMount() {
+    const sessionId = JSON.parse(sessionStorage.getItem("userInfo")).sessionId;
     this.fetchComments(this.props.match.params.id);
     this.fetchSinglePost(
       this.props.match.params.id,
@@ -28,7 +30,8 @@ class SinglePostPage extends React.Component {
   }
 
   fetchSinglePost(id, type) {
-    postService.singlePost(id, type).then(singlePost => {
+    postService.singlePost(id, type)
+    .then(singlePost => {
       this.setState({
         singlePost,
         loaded: true
@@ -54,26 +57,27 @@ class SinglePostPage extends React.Component {
     }
   };
 
-  
-
   render() {
     return (
-      <div>
-        <Header />
-        <div className="container">
-          <div>
-            {this.state.loaded ? this.displayPost() : <p> Loading.... </p>}
-          </div>
+      <div className="container">
+        <div>
+          {this.state.loaded ? (
+            this.displayPost()
+          ) : (
+            <div className="progress amber lighten-3">
+              <div className="indeterminate  amber" />
+            </div>
+          )}
+        </div>
+        <div>
           <div>
             <AddComment
               reloadPage={this.fetchComments}
               id={this.props.match.params.id}
-              
             />
             <CommentList comment={this.state.comment} />
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

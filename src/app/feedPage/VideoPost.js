@@ -1,18 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom"
-//import M from "materialize-css";
+
 
 const VideoPost = props => {
   const { post } = props;
 
-  // const feedVideo = (props) =>{
-  //   let videoLink = props.post.videoUrl;
-    
-  //   if (!videoLink.includes("embed")){
-  //       videoLink = videoLink.replace("watch?v=", "embed/")
-  //       }
-  //   }
-
+ 
 
   return (
     

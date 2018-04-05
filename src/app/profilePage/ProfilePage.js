@@ -1,36 +1,55 @@
 import React, { Component } from "react";
 import { userService } from "../../services/UserService";
 import UserInfo from "./UserInfo";
-import Header from '../partials/Header';
-import Footer from '../partials/Footer';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: []
+      userInfo: {}
     };
   }
   
   componentDidMount() {
-    this.fetchProfile(this.props.match.params.id);
+    this.getUser(this.props);
+  }
+  
+  getUser = (props) => {
+    if(props.match.params.id){
+      this.fetchProfile(props.match.params.id);
+    } else {
+      this.fetchMyProfile();
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    this.getUser(nextProps);
   }
 
   fetchProfile = (id) => {
-    userService.fetchUser(id).then(myProfile => {
+    userService.fetchUser(id).then(userProfile => {
       this.setState({
-        user: myProfile
+        userInfo: userProfile,
+        isMyProfile: false
       });
-         //console.log(myProfile);
     });
   };
 
+  fetchMyProfile = () => {
+    userService.fetchProfile()
+    .then(myProfile => {
+      this.setState({
+        userInfo: myProfile,
+        isMyProfile: true
+      });
+    });
+  };
+
+
   render() {
     return (
+      
       <div className="row">
-      <Header />
-        <UserInfo profile={this.state.user} />
-        <Footer/>
+        <UserInfo profile={this.state.userInfo} />
       </div>
     );
   }

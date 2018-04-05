@@ -1,17 +1,19 @@
-import Post from "../entities/Post";
 import TextPost from "../entities/TextPost";
 import VideoPost from "../entities/VideoPost";
 import ImagePost from "../entities/ImagePost";
+import { authService } from './AuthenticationService';
+import { SERVER_KEY } from '../shared/constants';
+
 
 class PostService {
-
   fetchPost() {
     return fetch("http://bitbookapi.azurewebsites.net/api/Posts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Key": "bitbook",
-        "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+        "Key": SERVER_KEY,
+        "SessionId": authService.getSessionId()
+       
       }
     })
       .then(response => {
@@ -26,7 +28,8 @@ class PostService {
           } else if (post.type === "video") {
             return new VideoPost(post);
           }
-        });
+          
+        })
       });
   }
 
@@ -35,11 +38,12 @@ class PostService {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Key": "bitbook",
-        "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+        "Key": SERVER_KEY,
+        "SessionId": authService.getSessionId()
+       
       },
       body: JSON.stringify({
-        text: text
+        "text": text
       })
     }).then(response => response.json());
     
@@ -50,11 +54,11 @@ class PostService {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Key": "bitbook",
-        "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+        "Key": SERVER_KEY,
+        "SessionId": authService.getSessionId()
       },
       body: JSON.stringify({
-        imageUrl: imageUrl
+        "imageUrl": imageUrl
       })
     }).then(response => response.json());
     
@@ -66,11 +70,12 @@ class PostService {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Key": "bitbook",
-        "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+        "Key": SERVER_KEY,
+        "SessionId": authService.getSessionId()
+        
       },
       body: JSON.stringify({
-        videoUrl: videoUrl
+        "videoUrl": videoUrl
       })
     }).then(response => response.json());
     
@@ -81,8 +86,8 @@ class PostService {
       method: "GET",
       headers: {
           "Content-Type": "application/json",
-          "Key": "bitbook",
-          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+          "Key": SERVER_KEY,
+          "SessionId": authService.getSessionId()
       }
       
   })
@@ -104,8 +109,9 @@ class PostService {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Key": "bitbook",
-        "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+        "Key": SERVER_KEY,
+        "SessionId": authService.getSessionId()
+        
     }
   
    }

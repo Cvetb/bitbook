@@ -7,8 +7,7 @@ import CreateNewPost from "./CreateNewPost";
 import NewTextPost from "./NewTextPost";
 import NewVideoPost from "./NewVideoPost";
 import NewImagePost from "./NewImagePost";
-import Header from "../partials/Header";
-import Footer from "../partials/Footer";
+
 import FilterPost from "./FilterPost";
 import M from "materialize-css";
 
@@ -24,45 +23,40 @@ class FeedPage extends Component {
 
   componentDidMount() {
     this.fetchPosts();
-    var elem = document.querySelector('.dropdown-trigger');
-    var instance = M.Dropdown.init(elem);
-  
-
+    var el = document.querySelector(".dropdown-trigger");
+    M.Dropdown.init(el);
   }
 
   fetchPosts = () => {
-    postService.fetchPost().then(postData => {
-      this.setState({
-        posts: postData,
-        filteredPosts: postData
-      });
+    postService.fetchPost()
+      .then(postData => {
+        this.setState({
+          posts: postData,
+          filteredPosts: postData
+        });
     });
   };
 
-  filterPosts = (postType) => {
-    console.log(postType)
+  filterPosts = postType => {
     this.setState({
       filteredPosts: this.state.posts.filter(el => {
         return el.type === postType;
       })
-    })
-
+    });
   };
 
   render() {
     return (
       <div>
-        <Header />
-        <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts}/>
+        <FilterPost filter={this.filterPosts} allPosts={this.fetchPosts} />
         <div className="container">
-          
           {this.state.filteredPosts.map(post => {
             if (post.type === "text") {
-              return <TextPost post={post} />;
+              return <TextPost post={post} key={post.postId} />;
             } else if (post.type === "image") {
-              return <ImagePost post={post} />;
+              return <ImagePost post={post} key={post.postId} />;
             } else {
-              return <VideoPost post={post} />;
+              return <VideoPost post={post} key={post.postId} />;
             }
           })}
 
@@ -71,7 +65,6 @@ class FeedPage extends Component {
           <NewImagePost reloadPage={this.fetchPosts} />
           <NewVideoPost reloadPage={this.fetchPosts} />
         </div>
-        <Footer />
       </div>
     );
   }

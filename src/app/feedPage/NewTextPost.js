@@ -23,8 +23,8 @@ class NewTextPost extends React.Component {
         })
     }
 
-    clickHandler = () => {
-        postService.newTextPost(this.state.inputValue)
+    clickHandler = (sessionId) => {
+        postService.newTextPost(this.state.inputValue, sessionId)
             .then(response => {
                 this.props.reloadPage();
             })

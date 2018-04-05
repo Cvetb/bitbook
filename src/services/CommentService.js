@@ -1,4 +1,6 @@
 import Comment from '../entities/Comment'
+import { authService } from './AuthenticationService';
+import { SERVER_KEY } from '../shared/constants';
 
 class CommentService {
     fetchComment(id) {
@@ -6,8 +8,9 @@ class CommentService {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Key": "bitbook",
-          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+          "Key": SERVER_KEY,
+          "SessionId": authService.getSessionId()
+         
         }
       })
       .then((response) => response.json())
@@ -22,8 +25,9 @@ class CommentService {
         method: "POST",
         headers:{
           "Content-Type": "application/json",
-          "Key": "bitbook",
-          "SessionId": "7A5D8FF8-B04D-4C8C-9812-8B44EB7E4C94"
+          "Key": SERVER_KEY,
+          "SessionId": authService.getSessionId()
+         
         },
         body: JSON.stringify({
           "body": data,

@@ -48,7 +48,7 @@ class AddComment extends React.Component {
                    
                         <div className="input-field">
                             <input placeholder="Add Comment" id="first_name" type="text" className="validate col m10" value={this.state.inputValue} onChange={this.handleInputChange} />
-                            <span className="btn-floating btn-large" onClick={this.clickHandler}><i className="large material-icons left">send</i></span>
+                            <span className="btn-floating btn-large blue darken-4" onClick={this.clickHandler}><i className="large material-icons left">send</i></span>
                             <a className="btn-floating btn-large waves-effect waves-light red right" onClick={this.deletePosts}><i className="material-icons">delete</i></a>
                         </div>
                     </div>

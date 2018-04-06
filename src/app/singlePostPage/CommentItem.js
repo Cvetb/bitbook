@@ -32,7 +32,7 @@ class CommentItem extends Component {
               </li>
               <li>
                 <h5>{this.props.singleComment.authorName}</h5>
-                <span className="secondary-content">
+                <span className="secondary-content blue-text text-darken-4">
                   {this.props.singleComment.dateCreated}
                 </span>
                 <br />

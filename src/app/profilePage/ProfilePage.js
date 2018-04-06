@@ -50,6 +50,8 @@ class Profile extends Component {
       
       <div className="row">
         <UserInfo profile={this.state.userInfo} />
+      
+      
       </div>
     );
   }

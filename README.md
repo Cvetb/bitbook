@@ -1,3 +1,10 @@
+
+
+![](https://screenshotscdn.firefoxusercontent.com/images/c02ed3b0-59bb-4bdc-8dec-de2248c7c523.png)
+
+![](https://screenshotscdn.firefoxusercontent.com/images/a3f3962f-be5c-4c16-9ead-b597d7eb7693.png)
+
+![feedpagescreenshot](https://user-images.githubusercontent.com/24230243/38755719-1316bfae-3f67-11e8-8ff0-012600e1cd7f.PNG)
 src
 
   app
@@ -25,7 +32,6 @@ src
     welcomePage
 
       Login.js ---------> create login form where people can login into their account trough login form
-      Register.js ------> create register form where people can create new account
       WelcomePage.js ---> place where we should have all logic of this page and render all components
 
     partials 

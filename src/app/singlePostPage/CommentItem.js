@@ -10,7 +10,7 @@ class CommentItem extends Component {
   }
 
   componentDidMount() {
-      this.fetchSingleUser();
+    this.fetchSingleUser();
   }
 
   fetchSingleUser = () => {

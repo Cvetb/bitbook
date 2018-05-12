@@ -34,7 +34,7 @@ class FeedPage extends Component {
           posts: postData,
           filteredPosts: postData
         });
-    });
+      });
   };
 
   filterPosts = postType => {

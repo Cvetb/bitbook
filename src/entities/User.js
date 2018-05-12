@@ -1,5 +1,5 @@
 class User {
-    constructor(user){
+    constructor(user) {
         this.aboutShort = user.aboutShort;
         this.avatarUrl = user.avatarUrl;
         this.id = user.id;
@@ -7,9 +7,9 @@ class User {
 
         this.email = user.email;
         this.about = user.about;
-        this.userId =user.userId;
+        this.userId = user.userId;
         this.postsCount = user.postsCount;
-        this.commentsCount = user.commentsCount;  
+        this.commentsCount = user.commentsCount;
         this.lastPostDate = user.lastPostDate;
     }
 }

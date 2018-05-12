@@ -76,7 +76,7 @@ class WelcomePage extends Component {
         <br />
         <div className="row">
           <div className="col m6 blue-grey-text text-darken-3">
-            <h4>Bitbook Login</h4>
+            <h4>Welcome to Bitbook</h4>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

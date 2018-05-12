@@ -20,6 +20,7 @@ class PostService {
         return response.json();
       })
       .then(result => {
+        // eslint-disable-next-line
         return result.map(post => {
           if (post.type === "text") {
             return new TextPost(post);

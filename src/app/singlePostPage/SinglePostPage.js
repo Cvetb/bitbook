@@ -1,9 +1,8 @@
 import React from "react";
-
-import CommentList from "./CommentList";
+import "./Single.css";
 import { commentService } from "../../services/CommentService";
 import { postService } from "../../services/PostService";
-import { userService } from "../../services/UserService";
+import CommentList from "./CommentList";
 import TextPost from "../feedPage/TextPost";
 import VideoPost from "../feedPage/VideoPost";
 import ImagePost from "../feedPage/ImagePost";
@@ -12,15 +11,19 @@ import AddComment from "./AddComment";
 class SinglePostPage extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       comment: [],
       singlePost: {},
       loaded: false,
-     
+
     };
   }
 
   componentDidMount() {
+
+
+    // eslint-disable-next-line
     const sessionId = JSON.parse(sessionStorage.getItem("userInfo")).sessionId;
     this.fetchComments(this.props.match.params.id);
     this.fetchSinglePost(
@@ -31,12 +34,13 @@ class SinglePostPage extends React.Component {
 
   fetchSinglePost(id, type) {
     postService.singlePost(id, type)
-    .then(singlePost => {
-      this.setState({
-        singlePost,
-        loaded: true
+      .then(singlePost => {
+        this.setState({
+          singlePost,
+          loaded: true,
+
+        });
       });
-    });
   }
 
   fetchComments = id => {
@@ -55,19 +59,20 @@ class SinglePostPage extends React.Component {
     } else {
       return <VideoPost post={this.state.singlePost} />;
     }
+
   };
 
   render() {
     return (
       <div className="container">
-        <div>
+        <div >
           {this.state.loaded ? (
             this.displayPost()
           ) : (
-            <div className="progress amber lighten-3">
-              <div className="indeterminate  amber" />
-            </div>
-          )}
+              <div className="progress amber lighten-3">
+                <div className="indeterminate  amber" />
+              </div>
+            )}
         </div>
         <div>
           <div>

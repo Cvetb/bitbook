@@ -26,17 +26,7 @@ class NewImagePost extends React.Component {
     }
 
     checkUrl = () => {
-        const input = this.state.input
-        const ext = input.substring(input.lastIndexOf('.') + 1);
-        
-        if (ext === "gif" || ext === "GIF" || ext === "JPEG" || ext === "jpeg" || ext === "jpg" || ext === "JPG" || ext === "doc" || ext === "png") {
-            this.setState({ success: "Success", error: null })
-            // return document.getElementById("labelImage").setAttribute("data-success", "Success");
-        }
-        else {
-            this.setState({ success: null, error: "Enter Valid URL" })
-            // return document.getElementById("labelImage").setAttribute("data-error", "Enter Valid URL");
-        }
+       
     }
 
     clickHandler = () => {

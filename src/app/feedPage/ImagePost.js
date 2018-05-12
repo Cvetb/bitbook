@@ -12,13 +12,13 @@ const ImagePost = props => {
       <div className="col s12">
         <div className="card">
           <div className="card">
-            <img alt="" width="90%" src={post.imageUrl} />
+            <img alt="" width="80%" src={post.imageUrl} />
           </div>
           <div className="card-content">
             <p className="left chip"><Link to = {`/ImagePosts/${post.postId}`} className="grey-text text-darken-3">{post.type} Post</Link></p>
             <p className="right chip"><Link to = {`/ImagePosts/${post.postId}`} className="grey-text text-darken-3">{post.postComments} Comments</Link></p>
-            <br/> 
           </div>
+          <br/>
         </div>
       </div>
     </div>

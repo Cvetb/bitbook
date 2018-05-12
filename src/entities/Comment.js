@@ -1,6 +1,6 @@
 const moment = require('moment');
 class Comment {
-    constructor(comment){
+    constructor(comment) {
         this.id = comment.id;
         this.dateCreated = moment.utc(comment.dateCreated).fromNow();
         this.body = comment.body;

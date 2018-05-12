@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { userService } from "../../services/UserService";
 import UserInfo from "./UserInfo";
+import EditProfile from "./EditProfile";
+
+
 
 class Profile extends Component {
   constructor(props) {
@@ -9,19 +12,19 @@ class Profile extends Component {
       userInfo: {}
     };
   }
-  
+
   componentDidMount() {
     this.getUser(this.props);
   }
-  
+
   getUser = (props) => {
-    if(props.match.params.id){
+    if (props.match.params.id) {
       this.fetchProfile(props.match.params.id);
     } else {
       this.fetchMyProfile();
     }
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.getUser(nextProps);
   }
 
@@ -36,22 +39,22 @@ class Profile extends Component {
 
   fetchMyProfile = () => {
     userService.fetchProfile()
-    .then(myProfile => {
-      this.setState({
-        userInfo: myProfile,
-        isMyProfile: true
+      .then(myProfile => {
+        this.setState({
+          userInfo: myProfile,
+          isMyProfile: true
+        });
       });
-    });
   };
-
 
   render() {
     return (
-      
+
       <div className="row">
         <UserInfo profile={this.state.userInfo} />
-      
-      
+        {this.state.isMyProfile ? <EditProfile /> : ""}
+
+
       </div>
     );
   }

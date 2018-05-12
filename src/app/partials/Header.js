@@ -43,7 +43,7 @@ const Header = props => {
             <li onClick={logOut}>
               <Link to="/login">
                 <i className="large material-icons left blue-grey-text text-darken-4">
-                exit_to_app
+                  exit_to_app
                 </i>Logout
               </Link>
             </li>
